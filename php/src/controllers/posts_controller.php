@@ -15,4 +15,11 @@ class PostsController extends BaseController
         $data = array('posts' => $posts);
         $this->render('index', $data);
     }
+
+    public function showPost()
+    {
+        $post = Post::find($_GET['id']);
+        $data = array('post' => $post);
+        $this->render('show', $data);
+    }
 }

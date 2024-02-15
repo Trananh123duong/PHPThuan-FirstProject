@@ -24,4 +24,17 @@ class Post
 
         return $list;
     }
+
+    static function find($id)
+    {
+        $db = DB::getInstance();
+        $req = $db->prepare('SELECT * FROM posts WHERE id = :id');
+        $req->execute(array('id' => $id));
+
+        $item = $req->fetch();
+        if (isset($item['id'])) {
+            return new Post($item['id'], $item['title'], $item['content']);
+        }
+        return null;
+    }
 }
